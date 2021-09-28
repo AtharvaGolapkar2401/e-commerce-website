@@ -15,6 +15,11 @@
 		{% for row in categories %}
 			<option value="{{row[0]}}">{{row[1]}}</option>
 		{% endfor %}
+	</select>
+	Main: <select name="main" style="width: 60px">
+		{% for row in main %}
+			<option value="{{row[0]}}">{{row[1]}}</option>
+		{% endfor %}
 	</select><br>
 	<input type="submit">
 </form>

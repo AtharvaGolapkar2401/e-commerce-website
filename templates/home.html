@@ -1,13 +1,46 @@
 <!DOCTYPE HTML>
 <html>
-<head>
+<head><meta charset="UTF-8">
 <title>Welcome</title>
 <link rel="stylesheet" href={{ url_for('static', filename='css/home.css') }} />
 <link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<style>
+
+
+
+    .carousel
+    {
+		position: relative;
+    }
+
+    .carousel-cell
+    {
+        width: 50%;
+        height: 500px;
+        margin-right: 10px;
+        background: red ;
+        border-radius: 10px;
+        counter-increment: carousel-cell;
+		box-shadow: black;
+    }
+
+    .carousel-cell:before{
+        display: block;
+        text-align: center;
+        list-style: 200px;
+        font-size: 80px ;
+    }
+
+</style>
+
 </head>
-<body>
+<body style="max-width: none;">
 <div id="title">
-	<a href="/">
+	<a href="/front">
 		<img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
 	</a>
 	<form>
@@ -37,17 +70,41 @@
 		</a>
 	</div>
 </div>
+<section style="position: relative;height: 100vh;">
+<div class="carousel" data-flickity='{ "wrapAround": true, "autoPlay" : true, "interval" : 5}'>
+	<div class="carousel-cell"><a href="productDescription?productId=15"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></a></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>       
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;"></div>
+</div>
+</section>
 <div class="display">
-	<div class="displayCategory">
-		<h2 class="cat">Shop by Category: </h2>
-		<ul>
-			{% for row in categoryData %}
-			<li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>
-			{% endfor %}
-		</ul>
+	<div style="position: relative;text-align: left; top: -150px;">
+		<h2 class="cat" style="position: relative; text-align: center;">What are you looking for?</h2>
+				{% for row in categoryData %}
+				<th><a href="/displayCategory?categoryId={{row[0]}}" 
+				style="text-decoration: none;
+				font-size: 15px;
+				background: red;
+				position: relative;
+				text-align: center;
+				border-radius: 12px;
+				color: white;
+				width: 3px;
+  				height: 1px;
+ 		 		padding: 10px;
+  				border: 1px solid black ;
+				"> &nbsp&nbsp&nbsp&nbsp {{row[1]}} &nbsp&nbsp&nbsp&nbsp</a></th>
+				{% endfor %}	
 	</div>
+
 	<div>
-		<h2>Items</h2>
+		<div> 
 		{% for data in itemData %}
 		<table>
 			<tr id="productName">
@@ -75,8 +132,12 @@
 			</tr>
 		</table>
 		{% endfor %}
+		</div>
 	</div>
 </div>
+
+
+
 </body>
 </html>
 

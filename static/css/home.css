@@ -1,4 +1,8 @@
 
+.body
+{
+	width: 100%;
+}
 #itemImage {
 	height: 200px;
 	width: 150px;
@@ -14,6 +18,7 @@
 table {
 	border-spacing: 20px;
 	background-color: none;
+	width: 100%;
 }
 
 #productName {
@@ -37,7 +42,7 @@ table {
 
 .cat
 {
-	text-align: right;
+	text-align:left;
 	position: relative;
 	text-decoration: none;
 }

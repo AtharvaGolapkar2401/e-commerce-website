@@ -28,6 +28,7 @@ conn.execute('''CREATE TABLE products
 		stock INTEGER,
 		categoryId INTEGER,
 		FOREIGN KEY(categoryId) REFERENCES categories(categoryId)
+		FOREIGN KEY(mainId) REFERENCES main(mainId)
 		)''')
 
 conn.execute('''CREATE TABLE kart

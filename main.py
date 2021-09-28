@@ -30,9 +30,9 @@ def root():
     with sqlite3.connect('database.db') as conn:
         cur = conn.cursor()
         cur.execute('SELECT productId, name, price, description, image, stock FROM products')
-        itemData = cur.fetchall()
+        itemData = cur.fetchmany(7)
         cur.execute('SELECT categoryId, name FROM categories')
-        categoryData = cur.fetchall()
+        categoryData = cur.fetchmany(7)
     itemData = parse(itemData)   
     return render_template('home.html', itemData=itemData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems, categoryData=categoryData)
 
@@ -42,8 +42,10 @@ def admin():
         cur = conn.cursor()
         cur.execute("SELECT categoryId, name FROM categories")
         categories = cur.fetchall()
+        cur.execute("SELECT mainId, name FROM main")
+        main = cur.fetchall()
     conn.close()
-    return render_template('add.html', categories=categories)
+    return render_template('add.html', categories=categories , main= main)
 
 @app.route("/addItem", methods=["GET", "POST"])
 def addItem():
@@ -341,6 +343,18 @@ def parse(data):
             i += 1
         ans.append(curr)
     return ans
+
+@app.route("/test")
+def test():
+    loggedIn, firstName, noOfItems = getLoginDetails()
+    with sqlite3.connect('database.db') as conn:
+        cur = conn.cursor()
+        cur.execute('SELECT productId, name, price, description, image, stock FROM products WHERE categoryId = 2')
+        itemData = cur.fetchall()
+        cur.execute('SELECT categoryId, name FROM categories')
+        categoryData = cur.fetchall()
+    itemData = parse(itemData)   
+    return render_template('test.html', itemData=itemData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems, categoryData=categoryData)
 
 if __name__ == '__main__':
     app.run(debug=True)
